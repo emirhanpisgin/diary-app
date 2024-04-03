@@ -2,20 +2,12 @@ import { useDialog } from "./context/DialogContext";
 import { useRef, useState, useEffect } from "react";
 
 export default function DialogRenderer() {
-    const { dialogComponent, setDialogComponent } = useDialog();
+    const { dialogComponent, isVisible, clearDialog } = useDialog();
     const dialogRef = useRef<HTMLDivElement>(null);
-    const [isVisible, setIsVisible] = useState(false);
-
-    useEffect(() => {
-        if (dialogComponent) {
-            setIsVisible(true);
-        }
-    }, [dialogComponent]);
 
     function handleClick(e: React.MouseEvent<HTMLDivElement, MouseEvent>) {
         if (e.target === dialogRef.current) {
-            setIsVisible(false);
-            setDialogComponent(undefined);
+            clearDialog();
         }
     };
 
