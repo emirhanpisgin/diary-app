@@ -13,6 +13,7 @@ if (require("electron-squirrel-startup")) {
 const createWindow = (): void => {
     // Create the browser window.
     const mainWindow = new BrowserWindow({
+        title: "Günlük",
         height: 900,
         width: 800,
         autoHideMenuBar: true,
