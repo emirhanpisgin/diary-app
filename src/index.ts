@@ -21,6 +21,7 @@ const createWindow = (): void => {
       preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY,
       nodeIntegration: true,
     },
+    icon: "./src/icon.ico"
   });
 
   // and load the index.html of the app.
