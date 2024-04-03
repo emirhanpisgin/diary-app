@@ -1,17 +1,31 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 
 export type DialogContextType = {
     dialogComponent?: React.ReactNode;
     setDialogComponent: React.Dispatch<React.SetStateAction<React.ReactNode>>;
+    isVisible: boolean;
+    clearDialog: () => void;
 }
 
 const DialogContext = createContext<DialogContextType | undefined>(undefined);
 
 export const DialogProvider = ({ children }: { children: React.ReactNode }) => {
     const [dialogComponent, setDialogComponent] = useState<JSX.Element | undefined>(undefined);
+    const [isVisible, setIsVisible] = useState(false);
+
+    useEffect(() => {
+        if (!dialogComponent) return;
+
+        setIsVisible(true);
+    }, [dialogComponent]);
+
+    function clearDialog() {
+        setIsVisible(false);
+        setDialogComponent(undefined);
+    }
 
     return (
-        <DialogContext.Provider value={{ dialogComponent, setDialogComponent }}>
+        <DialogContext.Provider value={{ dialogComponent, setDialogComponent, isVisible, clearDialog }}>
             {children}
         </DialogContext.Provider>
     );
